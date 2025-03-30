@@ -52,3 +52,8 @@ INSERT INTO departments
 VALUES
 ('Computer Science'),
 ('Mathematics');
+
+UPDATE TABLE students 
+SET f_name = "" WHERE email="";
+
+DELETE FROM students WHERE email="";
