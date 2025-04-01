@@ -151,32 +151,16 @@ def delete_course(id):
     cursor.close()
     connection.close()
 
-
-def create_courses():
-    conn = db_connection()
-    cursor=conn.cursor()
-    cursor.execute(""" 
-            CREATE table IF NOT EXISTS students (
-            student_id SERIAL  PRIMARY KEY,
-            first_name VARCHAR(50) NOT NULL,
-            last_name VARCHAR(50) NOT NULL,
-            email VARCHAR(100) UNIQUE,
-            enrollment_date DATE DEFAULT CURRENT_DATE);
-        """)
-    conn.commit()
-    cursor.close()
-    conn.close()
-    print("Table Created")
-
 def create_enrollment():
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute(""" 
+        CREATE TABLE IF NOT EXISTS enrollments(
                 enrollment_id SERIAL PRIMARY KEY,
                 student_id INT REFERENCES students(student_id) ON DELETE CASCADE,
-                teacher_id INT REFERENCES teachers(id) ON DELETE CASCADE,
+                teacher_id INT REFERENCES teacher(id) ON DELETE CASCADE,
                 course_id INT REFERENCES courses(course_id) ON DELETE CASCADE,
-                grade VARCHAR(2)
+                grade VARCHAR(2));
         """)
     conn.commit()
     cursor.close()
@@ -265,6 +249,5 @@ def delete_department(id):
     connection.close()
 
 if __name__== "__main__":
-    create_students()
-    insert_course('Abhishrek','Thapa','shrek123@gmail.com')
-    
+    create_enrollment()
+    insert_enrollment(1,4,1,'A')
