@@ -89,19 +89,19 @@ def update_student(id, name, age, department_id):
         SET name = %s, age = %s, department_id = %s 
         WHERE id = %s
     """, (name, age, department_id, id))
-    connection.commit()
+    conn.commit()
     print("Data updated")
     cursor.close()
-    connection.close()
+    conn.close()
 
 def delete_student(id):
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute("DELETE FROM students WHERE id = %s", (id,))
-    connection.commit()
+    conn.commit()
     print("Data deleted")
     cursor.close()
-    connection.close()
+    conn.close()
 
 def create_courses():
     conn = db_connection()
@@ -128,28 +128,28 @@ def insert_course(course_name, department_id, credits):
     conn.close()
     print("Data inserted")
 
-def update_course(id, name, credits):
+def update_course(id, name, department_id, credits):
     conn = db_connection()
     cursor=conn.cursor()
     cursor. execute("""
         UPDATE courses 
-        SET name = %s, credits = %s 
-        WHERE id = %s
-    """, (name, credits, id))
-    connection.commit()
+        SET course_name = %s, credits = %s, department_id = %s 
+        WHERE course_id = %s
+    """, (name, credits, department_id, id))
+    conn.commit()
     print("Data updated")
     cursor.close()
-    connection.close()
+    conn.close()
 
 
 def delete_course(id):
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute("DELETE FROM courses WHERE id = %s", (id,))
-    connection.commit()
+    conn.commit()
     print("Data deleted")
     cursor.close()
-    connection.close()
+    conn.close()
 
 def create_enrollment():
     conn = db_connection()
@@ -180,27 +180,27 @@ def insert_enrollment(student_id, teacher_id, course_id, grade):
     print("Data inserted")
 
 
-def update_enrollment(id, student_id, course_id):
+def update_enrollment(enrollment_id, student_id, course_id,grade):
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute("""
         UPDATE enrollments 
-        SET student_id = %s, course_id = %s 
-        WHERE id = %s
-    """, (student_id, course_id, id))
-    connection.commit()
+        SET student_id = %s, course_id = %s, grade= %s 
+        WHERE enrollment_id = %s
+    """, (student_id, course_id, grade,enrollment_id))
+    conn.commit()
     print("Data updated")
     cursor.close()
-    connection.close()
+    conn.close()
 
 def delete_enrollment(id):
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute("DELETE FROM enrollments WHERE id = %s", (id,))
-    connection.commit()
+    conn.commit()
     print("Data deleted")
     cursor.close()
-    connection.close()
+    conn.close()
 
 
 def create_departments():
@@ -231,23 +231,23 @@ def update_department(id, name):
     cursor=conn.cursor()
     cursor.execute("""
         UPDATE departments 
-        SET name = %s 
-        WHERE id = %s
+        SET department_name = %s 
+        WHERE department_id = %s
     """, (name, id))
-    connection.commit()
+    conn.commit()
     print("Data updated")
     cursor.close()
-    connection.close()
+    conn.close()
 
 def delete_department(id):
     conn = db_connection()
     cursor=conn.cursor()
     cursor.execute("DELETE FROM departments WHERE id = %s", (id,))
-    connection.commit()
+    conn.commit()
     print("Data deleted")
     cursor.close()
-    connection.close()
+    conn.close()
 
 if __name__== "__main__":
-    create_enrollment()
-    insert_enrollment(1,4,1,'A')
+    create_departments
+    update_department(1,"CS")
